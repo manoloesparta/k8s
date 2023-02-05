@@ -1,7 +1,7 @@
-IP=$1
+LOCAL_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
 
 # Start cluster
-sudo kubeadm init --pod-network-cidr 10.0.1.0/24 --apiserver-advertise-address $IP
+sudo kubeadm init --pod-network-cidr 10.0.1.0/24 --apiserver-advertise-address $LOCAL_IP
 
 # Setup for user
 mkdir -p $HOME/.kube

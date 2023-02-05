@@ -13,7 +13,13 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 # Docker setup
 sudo usermod -aG docker $USER
 sudo rm -rf /etc/containerd/config.toml
-sudo systemctl restart containerd
+echo "
+runtime-endpoint: unix:///var/run/containerd/containerd.sock
+image-endpoint: unix:///var/run/containerd/containerd.sock
+timeout: 10
+debug: true
+" | sudo tee /etc/crictl.yaml
+sudo service containerd restart
 
 # Install Kubernetes tools
 sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg

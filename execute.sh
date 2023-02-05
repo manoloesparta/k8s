@@ -4,7 +4,7 @@ OPTION=$1
 IP=$2
 
 INSTANCE_HOME=/home/ubuntu
-INSTACE_KEY=/Users/manolo/Documents/k8s-key.pem
+INSTACE_KEY=/Users/manolo/whatever/kubernetes-the-hard-way/kubernetes.id_rsa
 INSTANCE_HOST=ubuntu@$IP
 
 scp -i $INSTACE_KEY -r $(pwd)/setup ubuntu@$IP:$HOME_PATH
@@ -14,7 +14,7 @@ case $OPTION in
         ssh -i $INSTACE_KEY $INSTANCE_HOST -t $INSTANCE_HOME/setup/instance.sh 
     ;;
     setup-master-node) 
-        ssh -i $INSTACE_KEY $INSTANCE_HOST -t $INSTANCE_HOME/setup/master.sh $IP
+        ssh -i $INSTACE_KEY $INSTANCE_HOST -t $INSTANCE_HOME/setup/master.sh
     ;;
     setup-worker-node)
         ssh -i $INSTACE_KEY $INSTANCE_HOST -t $INSTANCE_HOME/setup/worker.sh 
