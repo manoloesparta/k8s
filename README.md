@@ -1,3 +1,3 @@
-# CKA
+# K8S
 
-Scripts for provisioning a Kubernetes cluster and setting up in certain scenarios.
+Scripts and infrastructure to create a Kubernetes cluster.
