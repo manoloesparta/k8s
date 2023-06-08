@@ -1,6 +1,11 @@
 # Trash
 .DS_Store
 
+# Python
+venv/
+__pycache__/
+*.pyc
+
 # Terraform
 terraform.tfstate
 .terraform.lock.hcl
