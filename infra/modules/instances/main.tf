@@ -1,5 +1,5 @@
 locals {
-  node_names = ["santa-clos", "melchor", "gaspar", "baltazar"]
+  node_names = ["santoclos", "melchor", "gaspar", "baltazar"]
 }
 
 resource "aws_security_group" "security_group" {
