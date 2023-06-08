@@ -5,6 +5,13 @@ terraform {
       version = "5.1.0"
     }
   }
+  backend "s3" {
+    bucket         = "cluster-state-k8s-reyes-magos"
+    key            = "cluster/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "cluster-state-locks-k8s-reyes-magos"
+    encrypt        = true
+  }
 }
 
 provider "aws" {
@@ -13,7 +20,7 @@ provider "aws" {
 }
 
 module "k8s_cluster" {
-  source      = "./cluster/vpc"
+  source      = "../modules/vpc"
   vpc_name    = "k8s vpc"
   subnet_name = "k8s subnet"
   ig_name     = "k8s internet gateway"
@@ -21,7 +28,7 @@ module "k8s_cluster" {
 }
 
 module "worker_nodes" {
-  source    = "./cluster/instances"
+  source    = "../modules/instances"
   sg_name   = "k8s security group"
   vpc_id    = module.k8s_cluster.vpc_id
   subnet_id = module.k8s_cluster.subnet_id

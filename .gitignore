@@ -1,3 +1,7 @@
+# Trash
+.DS_Store
+
+# Terraform
 terraform.tfstate
 .terraform.lock.hcl
 .terraform/
