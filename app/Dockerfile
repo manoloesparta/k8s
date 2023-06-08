@@ -8,6 +8,4 @@ RUN pip install -r requirements.txt
 
 COPY . /usr/src/
 
-ENV POD_ID=docker
-
 CMD [ "python", "app.py" ]

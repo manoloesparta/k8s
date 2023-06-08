@@ -5,9 +5,12 @@ from flask import Flask
 app = Flask(__name__)
 
 
+id = os.popen('cat /proc/sys/kernel/random/uuid').read()
+
+
 @app.route("/")
 def hello_world():
-    return os.environ.get("POD_ID")
+    return id
 
 
 if __name__ == '__main__':
