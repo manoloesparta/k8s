@@ -28,7 +28,7 @@ resource "aws_key_pair" "instance_key" {
   public_key = templatefile("${path.module}/key.pub", {})
 }
 
-resource "aws_instance" "node" {
+resource "aws_instance" "nodes" {
   ami           = var.instance_ami
   instance_type = var.instance_shape
   key_name      = aws_key_pair.instance_key.key_name
