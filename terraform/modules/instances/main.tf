@@ -1,5 +1,6 @@
 locals {
-  node_names = ["santoclos", "melchor", "gaspar", "baltazar"]
+  controller_node_names = ["cartman", "kenny", "butters"]
+  worker_node_names = [ "melchor", "gaspar", "baltazar"]
 }
 
 resource "aws_security_group" "security_group" {
@@ -28,12 +29,12 @@ resource "aws_key_pair" "instance_key" {
   public_key = templatefile("${path.module}/key.pub", {})
 }
 
-resource "aws_instance" "nodes" {
+resource "aws_instance" "worker_nodes" {
   ami           = var.instance_ami
   instance_type = var.instance_shape
   key_name      = aws_key_pair.instance_key.key_name
 
-  count = 4
+  count = 3
 
   subnet_id                   = var.subnet_id
   vpc_security_group_ids      = [aws_security_group.security_group.id]
@@ -42,6 +43,24 @@ resource "aws_instance" "nodes" {
   user_data = templatefile("${path.module}/user-data.sh", {})
 
   tags = {
-    Name = "${var.node_prefix}-${local.node_names[count.index]}"
+    Name = "${local.worker_node_names[count.index]}"
+  }
+}
+
+resource "aws_instance" "controller_nodes" {
+  ami           = var.instance_ami
+  instance_type = var.instance_shape
+  key_name      = aws_key_pair.instance_key.key_name
+
+  count = 3
+
+  subnet_id                   = var.subnet_id
+  vpc_security_group_ids      = [aws_security_group.security_group.id]
+  associate_public_ip_address = true
+
+  user_data = templatefile("${path.module}/user-data.sh", {})
+
+  tags = {
+    Name = "${local.controller_node_names[count.index]}"
   }
 }

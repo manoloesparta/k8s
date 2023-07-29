@@ -10,3 +10,10 @@ __pycache__/
 .terraform.lock.hcl
 .terraform/
 terraform.tfstate.backup
+
+# CA
+ca.csr
+ca.pem
+ca-key.pem
+ca-csr.json
+ca-config.json

@@ -27,9 +27,15 @@ module "k8s_cluster" {
   rt_name     = "k8s route table"
 }
 
-module "worker_nodes" {
+module "k8s_nodes" {
   source    = "../modules/instances"
   sg_name   = "k8s security group"
   vpc_id    = module.k8s_cluster.vpc_id
   subnet_id = module.k8s_cluster.subnet_id
+}
+
+module "k8s_public_api" {
+  source       = "../modules/lb"
+  lb_name      = "k8s-public-api"
+  instance_ids = module.k8s_nodes.instance_ids
 }

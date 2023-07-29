@@ -1,16 +1,18 @@
 # K8S
 
-Scripts and infrastructure to provision and create a Kubernetes cluster.
+Scripts and infrastructure code to provision and create a Kubernetes cluster.
 
-## Organization
+## Dependencies
 
-* `app`: Application for demoing Kubernetes cluster
-* `terraform`: Terraform code for the cluster infrastructure
-* `ansible`: Playbooks for setting up the cluster in certain scenarios
+* cfssl & cfssljson
+* kubectl
+* terraform
 
 ## Instructions
 
-To create the infrastucture please apply the `remote_state` module before any other root module. Adjust bucket and dynamodb table name to your own.
+1. Create the `remote_state` and adjust bucket and dynamodb name to your own.
+2. Apply the `cluster` terraform so it provisions the compute infrastructure for the cluster.
+3. Generate a Root CA with `scripts/generate-ca.sh`
 
 ## License
 
