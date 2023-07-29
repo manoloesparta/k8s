@@ -38,4 +38,5 @@ module "k8s_public_api" {
   source       = "../modules/lb"
   lb_name      = "k8s-public-api"
   instance_ids = module.k8s_nodes.instance_ids
+  subnet_id    = module.k8s_cluster.subnet_id
 }

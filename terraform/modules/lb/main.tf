@@ -1,6 +1,6 @@
 resource "aws_elb" "k8s_load_balancer" {
-  name               = var.lb_name
-  availability_zones = ["us-east-1a", "us-east-1b"]
+  name    = var.lb_name
+  subnets = [var.subnet_id]
 
   listener {
     instance_port     = 8000

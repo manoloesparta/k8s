@@ -1,6 +1,6 @@
 locals {
   controller_node_names = ["cartman", "kenny", "butters"]
-  worker_node_names = [ "melchor", "gaspar", "baltazar"]
+  worker_node_names     = ["melchor", "gaspar", "baltazar"]
 }
 
 resource "aws_security_group" "security_group" {
