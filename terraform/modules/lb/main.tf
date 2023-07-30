@@ -1,17 +1,24 @@
-resource "aws_elb" "k8s_load_balancer" {
-  name    = var.lb_name
-  subnets = [var.subnet_id]
+resource "aws_lb" "load_balancer" {
+  name               = var.lb_name
+  internal           = false
+  load_balancer_type = "network"
+  subnets            = [var.subnet_id]
+}
 
-  listener {
-    instance_port     = 8000
-    instance_protocol = "http"
-    lb_port           = 80
-    lb_protocol       = "http"
-  }
+resource "aws_lb_target_group" "target_group" {
+  name     = "k8s-nodes-target-group"
+  port     = 6443
+  protocol = "TCP"
+  vpc_id   = var.vpc_id
+}
 
-  instances = var.instance_ids
+resource "aws_lb_listener" "front_end" {
+  load_balancer_arn = aws_lb.load_balancer.arn
+  port              = 443
+  protocol          = "TCP"
 
-  tags = {
-    Name = var.lb_name
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.target_group.arn
   }
 }
