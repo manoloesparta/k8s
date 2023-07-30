@@ -16,4 +16,13 @@ ca.csr
 ca.pem
 ca-key.pem
 ca-csr.json
-ca-config.json
+
+# Generated certs
+scripts/admin
+scripts/rootca
+scripts/workers
+scripts/controller
+scripts/proxy
+scripts/scheduler
+scripts/api
+scripts/serviceaccount
