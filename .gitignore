@@ -20,9 +20,9 @@ ca-csr.json
 # Generated certs
 scripts/admin
 scripts/rootca
-scripts/workers
 scripts/controller
 scripts/proxy
 scripts/scheduler
 scripts/api
 scripts/serviceaccount
+scripts/workers

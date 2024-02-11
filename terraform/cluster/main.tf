@@ -20,7 +20,7 @@ provider "aws" {
 }
 
 module "k8s_cluster" {
-  source      = "../modules/vpc"
+  source      = "../modules/virtual_private_cloud"
   vpc_name    = "k8s vpc"
   subnet_name = "k8s subnet"
   ig_name     = "k8s internet gateway"
@@ -35,7 +35,7 @@ module "k8s_nodes" {
 }
 
 module "k8s_public_api" {
-  source    = "../modules/lb"
+  source    = "../modules/load_balancer"
   lb_name   = "k8s-public-api"
   vpc_id    = module.k8s_cluster.vpc_id
   subnet_id = module.k8s_cluster.subnet_id

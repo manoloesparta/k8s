@@ -39,6 +39,7 @@ resource "aws_instance" "worker_nodes" {
   subnet_id                   = var.subnet_id
   vpc_security_group_ids      = [aws_security_group.security_group.id]
   associate_public_ip_address = true
+  private_ip                  = "10.0.1.1${count.index}"
 
   user_data = templatefile("${path.module}/user-data.sh", {})
 
@@ -57,6 +58,7 @@ resource "aws_instance" "controller_nodes" {
   subnet_id                   = var.subnet_id
   vpc_security_group_ids      = [aws_security_group.security_group.id]
   associate_public_ip_address = true
+  private_ip                  = "10.0.1.2${count.index}"
 
   user_data = templatefile("${path.module}/user-data.sh", {})
 
